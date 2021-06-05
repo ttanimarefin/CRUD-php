@@ -50,8 +50,8 @@
                         <input type="submit" name="search" value="Search" class="btn btn-info">
                   
                   
-                    </form>
-            <?php
+            </form>
+<?php
 
 
 
