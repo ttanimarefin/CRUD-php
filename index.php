@@ -61,14 +61,28 @@ if(!$connection){
   die("not connected".mysqli_error($connection));
 }
 
-if(isset($_REQUEST['search'])){
-  $recver_nam=$_REQUEST['search_name'];
+
+if(isset($_REQUEST['delete_m_data'])){
+  $chk_data=$_REQUEST['check_data'];
+  $all_marked=implode(",",$chk_data);
+
+
+  $query= "DELETE FROM user WHERE id in ($all_marked) ";
+  $run_delete_query=mysqli_query($connection,$query);
+}
+
+
+$query="SELECT * FROM user";
+$all_user=mysqli_query($connection,$query);
+
+// if(isset($_REQUEST['search'])){
+//   $recver_nam=$_REQUEST['search_name'];
 
 
 
-$query=" SELECT * FROM user WHERE name LIKE '%$recver_nam%' ";
-$newcon=mysqli_query($connection,$query);
-$count= mysqli_num_rows($newcon);
+// $query= " SELECT * FROM user WHERE name LIKE '%$recver_nam%' ";
+// $newcon=mysqli_query($connection,$query);
+
 
 
 
@@ -85,6 +99,9 @@ if(isset($_REQUEST['updated'])){
 
 
 
+
+
+
 ?>
               
 
@@ -92,10 +109,14 @@ if(isset($_REQUEST['updated'])){
                   <br>
 
 
+
+
+
   <div class="card-header text-center">All User Details</div>
+
+
                   
-                  
-                   
+  <form action="" method="post">                 
                   
                   
     <table class="table table-hover ">
@@ -109,14 +130,23 @@ if(isset($_REQUEST['updated'])){
      <th scope="col">Phone</th>
      <th scope="col">Password</th>
      <th scope="col">Action</th>
+     <th scope="col"><input type="submit" class="btn btn-success" name="delete_m_data" value="Delete_Multiple" ></th>
+     
    </tr>
  </thead>
 
 <?php
 
+
+
+
 $serial_number=0;
 
-while( $row = mysqli_fetch_assoc($newcon)){
+
+while( $row = mysqli_fetch_assoc($all_user)){
+  
+
+
 
      $db_id=   $row['id'];
      
@@ -140,6 +170,7 @@ while( $row = mysqli_fetch_assoc($newcon)){
      <td><?php echo $phone; ?></td>
      <td><?php echo $password; ?></td>
      <td ><a class="text-decoration-none" href="single_edit.php?edit_id=<?php echo $db_id?>">Edit</a> || <a onclick="return confirm('Are You Sure?')" class="text-decoration-none" href="delete.php?id=<?php echo $db_id ?>&img=<?php echo  $img; ?>">Delete</a></td>
+     <td><center><input type="checkbox" name="check_data[]" value="<?php echo $db_id; ?>"></center></td>
    </tr>
  </tbody>
 
@@ -149,12 +180,13 @@ while( $row = mysqli_fetch_assoc($newcon)){
 ?>
 
 </table>
+</form>
 <?php
 
 
 
 
-}
+// }
 
 ?>
             
