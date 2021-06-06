@@ -14,7 +14,6 @@ if(isset($_REQUEST['edit_id'])){
 
     while($row=mysqli_fetch_array($update_info)){
     
-        
 
 
     ?>
@@ -52,8 +51,31 @@ if(isset($_REQUEST['edit_id'])){
                         <label for="password">Password</label>
                         <input type="password" name="password" value="<?php echo $row['password'];?>" id="password" class="form-control">
                         </div>
+
+                        <div class="form-group mb-3">
+                        <label for="radio">Gender</label>
+                        <input type="radio" name="gender" id=""  value="Male" <?php if ($row['gender'] == 'male') { echo ' selected="selected"'; } ?>>Male
+                        <input type="radio" name="gender" id=""   value="Female" <?php if ($row['gender'] == 'female') { echo ' selected="selected"'; } ?>>">Female
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                        <label for="Country">Country</label>
+                        <select name="country" >
+                        
+                              <option value="">Select your country</option>
+                              <option value="Bangladesh" <?php if ($row['country'] == 'Bangladesh') { echo ' selected="selected"'; } ?>>Bangladesh</option>
+                              <option value="india" <?php if ($row['country'] == 'india') { echo ' selected="selected"'; } ?>>india</option>
+                              <option value="usa">usa</option>
+                        </select>
+                        </div>
+
+
+
                         <button type="submit" name="submit" class="btn btn-primary"  value="update">update </button>
                         <input type="hidden" name="hidden_data" value="<?php echo $edt_id;?>" >
+
+
                   </form>
               
             </div>          

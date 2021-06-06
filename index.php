@@ -37,6 +37,25 @@
                         </div>
 
                         <div class="form-group mb-3">
+                        <label for="radio">Gender</label>
+                        <input type="radio" name="gender" id=""   value="male">Male
+                        <input type="radio" name="gender" id=""   value="female">Female
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                        <label for="Country">Country</label>
+                        <select name="country" >
+                        
+                              <option value="">Select your country</option>
+                              <option value="Bangladesh">Bangladesh</option>
+                              <option value="india">india</option>
+                              <option value="usa">usa</option>
+                        </select>
+                        </div>
+
+
+                        <div class="form-group mb-3">
                         <label for="Upload">Image</label>
                         <input type="file"  name="upload_img" value="upload" class="btn btn-Secondary" class="form-control">
                         </div>
@@ -121,7 +140,7 @@ if(isset($_REQUEST['updated'])){
                   
     <table class="table table-hover ">
      <tr> 
-     <thead>
+     <thead class="bg-dark text-light">
      <th scope="col">Serial No.</th>
      <th scope="col">DB Id</th>
      <th scope="col">Image</th>
@@ -129,6 +148,9 @@ if(isset($_REQUEST['updated'])){
      <th scope="col">Email</th>
      <th scope="col">Phone</th>
      <th scope="col">Password</th>
+     <th scope="col">Gender</th>
+     <th scope="col">Country</th>
+
      <th scope="col">Action</th>
      <th scope="col"><input type="submit" class="btn btn-success" name="delete_m_data" value="Delete_Multiple" ></th>
      
@@ -155,6 +177,8 @@ while( $row = mysqli_fetch_assoc($all_user)){
      $email=   $row['email'];
      $phone=   $row['phone'];
      $password=   $row['password'];
+     $gender=   $row['gender'];
+     $country=   $row['country'];
      $serial_number++;
 
 
@@ -169,6 +193,8 @@ while( $row = mysqli_fetch_assoc($all_user)){
      <td><?php echo $email; ?></td>
      <td><?php echo $phone; ?></td>
      <td><?php echo $password; ?></td>
+     <td><?php echo $gender; ?></td>
+     <td><?php echo $country; ?></td>
      <td ><a class="text-decoration-none" href="single_edit.php?edit_id=<?php echo $db_id?>">Edit</a> || <a onclick="return confirm('Are You Sure?')" class="text-decoration-none" href="delete.php?id=<?php echo $db_id ?>&img=<?php echo  $img; ?>">Delete</a></td>
      <td><center><input type="checkbox" name="check_data[]" value="<?php echo $db_id; ?>"></center></td>
    </tr>
